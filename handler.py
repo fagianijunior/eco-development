@@ -4,19 +4,14 @@ import os
 region=os.environ['REGION']
 
 def filter_by_tags(tags):
-    stag = False
     eco  = False
     
     for tag in tags:
-        if tag["key"] == "Environment":
-            if tag["value"] == "staging":
-                stag = True
-
         if tag["key"] == "ecoFriendly":
             if tag["value"] == "true":
                 eco = True
 
-    return all([stag, eco])
+    return eco
 
 def sleep_ecs_all():
     ecs             = boto3.client("ecs", region_name=region)
@@ -107,9 +102,6 @@ def sleep_ec2_all():
     # Filter EC2 instances by tags
     instances = ec2.describe_instances(Filters=[
         {
-            'Name': 'tag:Environment',
-            'Values': ['staging']
-        }, {
             'Name': 'tag:ecoFriendly',
             'Values': ['true']
         }
@@ -189,9 +181,6 @@ def wakeup_ec2_all():
     # Filter EC2 instances by tags
     instances = ec2.describe_instances(Filters=[
         {
-            'Name': 'tag:Environment',
-            'Values': ['staging']
-        }, {
             'Name': 'tag:ecoFriendly',
             'Values': ['true']
         }
