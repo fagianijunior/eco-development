@@ -33,10 +33,9 @@ def sleep_ecs_all():
             services = ecs.list_services(cluster=clusterInfo["clusterArn"])
             for service in services["serviceArns"]:
 
-                print(service)
                 ecs.update_service(
                     cluster=clusterInfo["clusterArn"],
-                    service=service["serviceName"],
+                    service=service,
                     desiredCount=0
                 )
 
@@ -118,7 +117,6 @@ def sleep_ec2_all():
     
     for reservation in instances['Reservations']:
         for instance in reservation['Instances']:
-            print("Instance:", instance)
             instanceId=instance['InstanceId']
             ec2.stop_instances(InstanceIds=[instanceId])
 
@@ -201,7 +199,6 @@ def wakeup_ec2_all():
     
     for reservation in instances['Reservations']:
         for instance in reservation['Instances']:
-            print("Instance:", instance)
             instanceId=instance['InstanceId']
             ec2.start_instances(InstanceIds=[instanceId])
 
@@ -220,19 +217,18 @@ def wakeup_ecs_all():
             services = ecs.list_services(cluster=clusterInfo["clusterArn"])
             for service in services["serviceArns"]:
 
-                print(service)
                 ecs.update_service(
                     cluster=clusterInfo["clusterArn"],
-                    service=service["serviceName"],
+                    service=service,
                     desiredCount=1
                 )
 
-def sleep(event, context):
+def sleep_time(event, context):
     sleep_rds_all()
     sleep_ecs_all()
     sleep_ec2_all()
 
-def wakeup(event, context):
+def wakeup_time(event, context):
     wakeup_rds_all()
     wakeup_ecs_all()
     wakeup_ec2_all()

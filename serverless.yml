@@ -72,11 +72,13 @@ provider:
 
 functions:
   adventure_time:
-    handler: handler.wakeup
+    handler: handler.wakeup_time
     events:
       - schedule: cron(0 6 ? * MON-FRI *)
+    environment:
+      REGION: us-east-1
   sleep_time:
-    handler: handler.sleep
+    handler: handler.sleep_time
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
