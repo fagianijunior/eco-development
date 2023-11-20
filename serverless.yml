@@ -34,15 +34,15 @@ provider:
       statements:
         - Effect: "Allow"
           Action:
-            - "rds:*"
+            - ["rds:Describe*", "rds:Start*", "rds:Stop*", "rds:ListTagsForResource"]
           Resource: "*"
         - Effect: "Allow"
           Action:
-            - "ecs:*"
+            - ["ecs:StartTask", "ecs:StopTask"]
           Resource: "*"
         - Effect: "Allow"
           Action:
-            - "ec2:*"
+            - ["ec2:Start*", "ec2:Stop*"]
           Resource: "*"
         - Effect: "Allow"
           Action:
