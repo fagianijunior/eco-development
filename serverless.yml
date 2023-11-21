@@ -43,11 +43,16 @@ provider:
           Action:
             - "ecs:StartTask"
             - "ecs:StopTask"
+            - "ecs:ListClusters"
+            - "ecs:DescribeClusters"
+            - "ecs:ListServices"
+            - "ecs:UpdateService"
           Resource: "*"
         - Effect: "Allow"
           Action:
             - "ec2:Start*"
             - "ec2:Stop*"
+            - "ec2:DescribeInstances"
           Resource: "*"
         - Effect: "Allow"
           Action:
