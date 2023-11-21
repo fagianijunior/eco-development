@@ -82,7 +82,7 @@ provider:
 
 functions:
   adventure_time:
-    handler: handler.wakeup_time
+    handler: handler.adventure_time
     events:
       - schedule: cron(0 6 ? * MON-FRI *)
     environment:
