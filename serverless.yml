@@ -24,6 +24,7 @@ provider:
   name: aws
   runtime: python3.11
 
+
 # you can overwrite defaults here
   stage: dev
   region: us-east-1
@@ -69,8 +70,9 @@ provider:
                 - "/*"
 
 # you can define service wide environment variables here
-#  environment:
+# environment:
 #    variable1: value1
+
 
 # you can add packaging information here
 #package:
@@ -84,16 +86,17 @@ functions:
   adventure_time:
     handler: handler.adventure_time
     events:
-      - schedule: cron(0 6 ? * MON-FRI *)
+      - schedule: cron(0 11 ? * MON-FRI *)
     environment:
       REGION: us-east-1
+      TZ: America/Fortaleza
   sleep_time:
     handler: handler.sleep_time
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
     events:
-      - schedule: cron(0 20 ? * MON-FRI *)
+      - schedule: cron(0 2 ? * MON-FRI *)
 #      - httpApi:
 #          path: /users/create
 #          method: get
@@ -128,6 +131,7 @@ functions:
 #    Define function environment variables here
     environment:
       REGION: us-east-1
+      TZ: America/Fortaleza
 
 # you can add CloudFormation resource templates here
 #resources:

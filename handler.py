@@ -110,7 +110,6 @@ def sleep_ec2_all():
     
     for reservation in instances['Reservations']:
         for instance in reservation['Instances']:
-            print('Stoping EC2 instance: ', instance)
             instanceId=instance['InstanceId']
             ec2.stop_instances(InstanceIds=[instanceId])
 
@@ -190,8 +189,6 @@ def wakeup_ec2_all():
     
     for reservation in instances['Reservations']:
         for instance in reservation['Instances']:
-            print('Starting EC2 instance: ', instance)
-
             instanceId=instance['InstanceId']
             ec2.start_instances(InstanceIds=[instanceId])
 
