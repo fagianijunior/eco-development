@@ -6,14 +6,22 @@
 
   # https://devenv.sh/packages/
   packages = [
-    pkgs.serverless
+    # NOTE: pkgs.serverless was removed upstream from the pinned nixpkgs
+    # (3.x unmaintained/vulnerable, 4.x has no suitable download). Install the
+    # Serverless Framework via npm when needed for deploys. It is not required
+    # to run the Python test suite.
     pkgs.nodejs         # redundante, mas seguro
     pkgs.docker         # se você for empacotar com Docker
-    pkgs.python3 
   ];
 
   # https://devenv.sh/languages/
-  # languages.rust.enable = true;
+  languages.python = {
+    enable = true;
+    venv = {
+      enable = true;
+      requirements = ./requirements-dev.txt;
+    };
+  };
 
   # https://devenv.sh/processes/
   # processes.cargo-watch.exec = "cargo-watch";

@@ -40,14 +40,21 @@ provider:
             - "rds:Stop*"
             - "rds:ListTagsForResource"
           Resource: "*"
+        # IAM mínima (requisito 2.10): a lógica ECS opera apenas via
+        # ecs:UpdateService (scale 0 no sleep, restauração no wakeup) e, por usar
+        # a estratégia de restauração do desiredCount via tag (task 3.6),
+        # precisa de ecs:DescribeServices, ecs:TagResource e
+        # ecs:ListTagsForResource. As ações ecs:StartTask/ecs:StopTask foram
+        # removidas por não serem usadas pelo handler.
         - Effect: "Allow"
           Action:
-            - "ecs:StartTask"
-            - "ecs:StopTask"
             - "ecs:ListClusters"
             - "ecs:DescribeClusters"
             - "ecs:ListServices"
+            - "ecs:DescribeServices"
             - "ecs:UpdateService"
+            - "ecs:TagResource"
+            - "ecs:ListTagsForResource"
           Resource: "*"
         - Effect: "Allow"
           Action:
@@ -90,11 +97,19 @@ package:
 #    - include-me.py
 #    - include-me-dir/**
 
+# Agendamento (requisito 2.7):
+# As expressões cron do EventBridge são SEMPRE avaliadas em UTC; a env var TZ
+# afeta apenas o runtime Python, não o agendamento. Optamos por manter o evento
+# `schedule` com cron e converter os horários locais de America/Fortaleza
+# (UTC-3, offset fixo, sem horário de verão) para UTC, somando 3 horas.
+#   wakeup (adventure_time): 07:00 local  -> 10:00 UTC (mesmo dia)   MON-FRI -> MON-FRI
+#   sleep  (sleep_time):     17:00 local  -> 20:00 UTC (mesmo dia)   MON-FRI -> MON-FRI
 functions:
   adventure_time:
     handler: handler.adventure_time
     events:
-      - schedule: cron(0 7 ? * MON-FRI *)
+      # 07:00 America/Fortaleza = 10:00 UTC (mesmo dia da semana)
+      - schedule: cron(0 10 ? * MON-FRI *)
     environment:
       REGION: us-east-1
       TZ: America/Fortaleza
@@ -104,7 +119,8 @@ functions:
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
     events:
-      - schedule: cron(0 23 ? * MON-FRI *)
+      # 17:00 America/Fortaleza = 20:00 UTC (mesmo dia da semana)
+      - schedule: cron(0 20 ? * MON-FRI *)
 #      - httpApi:
 #          path: /users/create
 #          method: get

@@ -1,0 +1,203 @@
+{
+  "pbtResults": {
+    "1. Escrever teste exploratório da condição de bug (ANTES da correção)": {
+      "status": "passed",
+      "failingExample": "Exploration test (Property 1: Bug Condition) FAILED as expected on the UNFIXED code — all 8 cases produced counterexamples proving the bugs exist. Run: `devenv shell -- python -m pytest tests/test_bug_condition.py` → 8 failed.\n\nC_tags_rds (1.2/1.3): RDS instance tags=[env=prod, ecoFriendly=true] → eligible AND printed \"DB instance multi-tag-db is not part of autoshutdown\" (tag-by-tag decision inside loop).\nC_tags_casing (1.4): filter_by_tags([{Key:ecoFriendly,Value:true}]) → KeyError: 'key' (handler.py:10 reads lowercase tag[\"key\"]/[\"value\"]).\nC_pagination (1.5): two-page list_services (nextToken) → only svc-1 processed, svc-2 ignored (no paginator).\nC_desiredCount (1.6): service desiredCount=4 → sleep(0) → wakeup → 1 (expected 4; wakeup_ecs_all hardcodes desiredCount=1).\nC_errors (1.8): stop_instances raising on instance #1 aborts whole run; instance #2 never processed (no per-resource try/except).\nC_region (1.11): importing handler without REGION → KeyError: 'REGION' at handler.py:4 (module-level os.environ['REGION']).\nC_schedule (1.7): adventure_time cron hour=7 UTC, intended 07:00 America/Fortaleza=10 UTC (sleep 23 local=02 UTC). cron ignores TZ.\nC_naming (1.1): README --function wakeup_time not in serverless.yml registered functions [adventure_time, sleep_time].",
+      "lastRunTimestamp": 1793716233585
+    }
+  },
+  "executionHistory": {
+    "1. Escrever teste exploratório da condição de bug (ANTES da correção)": [
+      {
+        "executionId": "45d8181b-755a-451e-8540-2d217b63eebb",
+        "chatSessionId": "sess_a5c73225-4fed-4b43-a756-fb88f0ad9513",
+        "timestamp": 1793715507816
+      },
+      {
+        "executionId": "8b68b824-f871-462a-8fd6-cfb32c1411fa",
+        "chatSessionId": "sess_a5c73225-4fed-4b43-a756-fb88f0ad9513",
+        "timestamp": 1793716051833
+      },
+      {
+        "executionId": "8b68b824-f871-462a-8fd6-cfb32c1411fa",
+        "chatSessionId": "sess_a5c73225-4fed-4b43-a756-fb88f0ad9513",
+        "timestamp": 1793716252670
+      }
+    ],
+    "2. Escrever testes de preservação baseados em propriedades (ANTES da correção)": [
+      {
+        "executionId": "45d870fe-9773-433e-b8df-35e76a387628",
+        "chatSessionId": "sess_51f227d0-388a-4a08-9513-a79c064810aa",
+        "timestamp": 1793716364951
+      },
+      {
+        "executionId": "45d870fe-9773-433e-b8df-35e76a387628",
+        "chatSessionId": "sess_51f227d0-388a-4a08-9513-a79c064810aa",
+        "timestamp": 1793716726282
+      }
+    ],
+    "3.1 Implementar leitura resiliente de REGION": [
+      {
+        "executionId": "d33a36f2-2d87-487d-8c03-e15066058958",
+        "chatSessionId": "sess_2912cb1b-4b98-4ae8-89e5-b2b767eee8b5",
+        "timestamp": 1793716863806
+      },
+      {
+        "executionId": "d33a36f2-2d87-487d-8c03-e15066058958",
+        "chatSessionId": "sess_2912cb1b-4b98-4ae8-89e5-b2b767eee8b5",
+        "timestamp": 1793717520853
+      }
+    ],
+    "3.2 Substituir print por logging estruturado": [
+      {
+        "executionId": "ee22e373-c141-41be-9df3-d104c6402c7b",
+        "chatSessionId": "sess_f07c619a-aca9-4708-abce-d7bb0910c1b6",
+        "timestamp": 1793717584196
+      },
+      {
+        "executionId": "ee22e373-c141-41be-9df3-d104c6402c7b",
+        "chatSessionId": "sess_f07c619a-aca9-4708-abce-d7bb0910c1b6",
+        "timestamp": 1793717778258
+      }
+    ],
+    "3.3 Introduzir helper comum de verificação de tags": [
+      {
+        "executionId": "3c641f0d-331e-4778-a75c-63a1950be0a9",
+        "chatSessionId": "sess_6c2b0580-24e5-4c8e-9eae-bb1877be45a1",
+        "timestamp": 1793718152260
+      },
+      {
+        "executionId": "3c641f0d-331e-4778-a75c-63a1950be0a9",
+        "chatSessionId": "sess_6c2b0580-24e5-4c8e-9eae-bb1877be45a1",
+        "timestamp": 1793718290114
+      }
+    ],
+    "3.4 Corrigir a lógica de filtro de tags do RDS": [
+      {
+        "executionId": "4d0c44f4-dea9-4bd1-b62b-acd38459eff1",
+        "chatSessionId": "sess_141b7e9e-a646-4366-9797-ff0c4cd0c69e",
+        "timestamp": 1793719024086
+      },
+      {
+        "executionId": "4d0c44f4-dea9-4bd1-b62b-acd38459eff1",
+        "chatSessionId": "sess_141b7e9e-a646-4366-9797-ff0c4cd0c69e",
+        "timestamp": 1793720277588
+      }
+    ],
+    "3.5 Adicionar paginação às listagens AWS": [
+      {
+        "executionId": "d2310317-35b1-4529-af8d-83a342601ea8",
+        "chatSessionId": "sess_d97098a9-9b68-4882-943d-87c01b31c17f",
+        "timestamp": 1793720343447
+      },
+      {
+        "executionId": "d2310317-35b1-4529-af8d-83a342601ea8",
+        "chatSessionId": "sess_d97098a9-9b68-4882-943d-87c01b31c17f",
+        "timestamp": 1793720478020
+      }
+    ],
+    "3.6 Restaurar o desiredCount original dos serviços ECS": [
+      {
+        "executionId": "b490e46f-6c63-4d78-82fa-8d3ca5acdfb5",
+        "chatSessionId": "sess_15e3d1a6-a082-4596-9257-b46c43160ec7",
+        "timestamp": 1793720748382
+      },
+      {
+        "executionId": "b490e46f-6c63-4d78-82fa-8d3ca5acdfb5",
+        "chatSessionId": "sess_15e3d1a6-a082-4596-9257-b46c43160ec7",
+        "timestamp": 1793720939209
+      }
+    ],
+    "3.7 Isolar falhas por recurso com tratamento de erros": [
+      {
+        "executionId": "0971f852-dce6-4de3-a040-267da7dd6413",
+        "chatSessionId": "sess_280aaf87-972a-4c2e-a6d6-23c12d632fe8",
+        "timestamp": 1793720985154
+      },
+      {
+        "executionId": "0971f852-dce6-4de3-a040-267da7dd6413",
+        "chatSessionId": "sess_280aaf87-972a-4c2e-a6d6-23c12d632fe8",
+        "timestamp": 1793723366916
+      }
+    ],
+    "3.8 Ajustar o agendamento cron/timezone no serverless.yml": [
+      {
+        "executionId": "80b5e2a8-3335-42b3-8438-da7da6df2536",
+        "chatSessionId": "sess_cd99ec91-cba1-402e-95f4-1fc53554c9d5",
+        "timestamp": 1793723380635
+      },
+      {
+        "executionId": "80b5e2a8-3335-42b3-8438-da7da6df2536",
+        "chatSessionId": "sess_cd99ec91-cba1-402e-95f4-1fc53554c9d5",
+        "timestamp": 1793723461583
+      }
+    ],
+    "3.9 Alinhar a política IAM ao uso real": [
+      {
+        "executionId": "85794993-7069-48d8-b6c5-2e3cc147d5b4",
+        "chatSessionId": "sess_750dd538-a1ee-4ec7-a4fb-517ceca71216",
+        "timestamp": 1793723502786
+      },
+      {
+        "executionId": "85794993-7069-48d8-b6c5-2e3cc147d5b4",
+        "chatSessionId": "sess_750dd538-a1ee-4ec7-a4fb-517ceca71216",
+        "timestamp": 1793723776707
+      }
+    ],
+    "3.10 Unificar nomes de função entre serverless.yml, handler.py e README.md": [
+      {
+        "executionId": "bc7b304d-678c-449b-802e-e8f2f1224855",
+        "chatSessionId": "sess_99c1b821-376e-430e-af50-4b845e6544fd",
+        "timestamp": 1793723815072
+      },
+      {
+        "executionId": "bc7b304d-678c-449b-802e-e8f2f1224855",
+        "chatSessionId": "sess_99c1b821-376e-430e-af50-4b845e6544fd",
+        "timestamp": 1793723915991
+      }
+    ],
+    "3.11 Verificar que o teste exploratório da condição de bug agora passa": [
+      {
+        "executionId": "284ad2f1-f591-40ae-9480-e747550c61b2",
+        "chatSessionId": "sess_efd74b64-feb7-42cd-ab11-1a59db5ae36b",
+        "timestamp": 1793724033801
+      },
+      {
+        "executionId": "284ad2f1-f591-40ae-9480-e747550c61b2",
+        "chatSessionId": "sess_efd74b64-feb7-42cd-ab11-1a59db5ae36b",
+        "timestamp": 1793724100704
+      }
+    ],
+    "3.12 Verificar que os testes de preservação continuam passando": [
+      {
+        "executionId": "10c0f8ed-c7f3-4437-91d9-d48c3f7e8dcf",
+        "chatSessionId": "sess_8c987285-aa2a-46b1-b5e9-7acdfda2a175",
+        "timestamp": 1793724129328
+      },
+      {
+        "executionId": "10c0f8ed-c7f3-4437-91d9-d48c3f7e8dcf",
+        "chatSessionId": "sess_8c987285-aa2a-46b1-b5e9-7acdfda2a175",
+        "timestamp": 1793724237856
+      }
+    ],
+    "3. Correção abrangente do agendador eco (handler.py, serverless.yml, README.md)": [
+      {
+        "executionId": "10c0f8ed-c7f3-4437-91d9-d48c3f7e8dcf",
+        "chatSessionId": "sess_8c987285-aa2a-46b1-b5e9-7acdfda2a175",
+        "timestamp": 1793724238422
+      }
+    ],
+    "4. Checkpoint - Garantir que todos os testes passam": [
+      {
+        "executionId": "f48b009a-d86b-4b71-baf0-efaec280c260",
+        "chatSessionId": "sess_0a451a9d-baa0-4ad8-b0ee-54de486aa449",
+        "timestamp": 1793724276349
+      },
+      {
+        "executionId": "f48b009a-d86b-4b71-baf0-efaec280c260",
+        "chatSessionId": "sess_0a451a9d-baa0-4ad8-b0ee-54de486aa449",
+        "timestamp": 1793724432553
+      }
+    ]
+  }
+}

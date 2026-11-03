@@ -1,0 +1,14 @@
+{
+  "name": "eco-development",
+  "version": "1.0.0",
+  "description": "Lambda agendada para ligar/desligar recursos AWS marcados com a tag ecoFriendly",
+  "private": true,
+  "scripts": {
+    "deploy": "AWS_SDK_LOAD_CONFIG=1 serverless deploy",
+    "sleep": "serverless invoke local --function sleep_time",
+    "wakeup": "serverless invoke local --function adventure_time"
+  },
+  "devDependencies": {
+    "serverless": "^3.40.0"
+  }
+}
