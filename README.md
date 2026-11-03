@@ -36,6 +36,34 @@ npm run sleep    # invoke local sleep_time
 npm run wakeup   # invoke local adventure_time
 ```
 
+## Testes
+
+A suíte de testes usa `pytest`, com `moto` para mockar a AWS e `hypothesis`
+para testes baseados em propriedades. As dependências estão em
+`requirements-dev.txt` e são providas pelo ambiente devenv (venv Python).
+
+Dentro do shell do devenv (`direnv`/`devenv shell`), rode:
+
+```bash
+pytest           # roda toda a suíte
+pytest -q        # saída resumida
+pytest -v        # saída detalhada por teste
+```
+
+Rodar um arquivo ou um teste específico:
+
+```bash
+pytest tests/test_bug_condition.py
+pytest tests/test_preservation.py::test_c_schedule_fortaleza_offset
+```
+
+Organização dos testes (`tests/`):
+
+- `test_bug_condition.py` — reproduz as condições de bug corrigidas
+  (tags, paginação, desiredCount, agendamento, REGION, nomenclatura).
+- `test_preservation.py` — garante que o comportamento preservado
+  (seleção por tag, Read Replica, Aurora, transições de estado) não regrediu.
+
 ## Deploy
 
 Informe o profile AWS no qual o stack deve ser criado. Sem o profile, o deploy

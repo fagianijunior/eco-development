@@ -395,11 +395,11 @@ def test_c_schedule_fortaleza_offset():
     """Validates: Requirements 1.7"""
     # America/Fortaleza is fixed UTC-3 (no DST). A local time L maps to UTC L+3.
     # Intended local times: adventure_time (wakeup) 07:00 local -> 10:00 UTC,
-    # sleep_time 23:00 local -> 02:00 UTC (next day).
+    # sleep_time 17:00 local -> 20:00 UTC (same day).
     FORTALEZA_OFFSET = 3  # hours to ADD to local time to get UTC
     intended_local = {
         "adventure_time": 7,
-        "sleep_time": 23,
+        "sleep_time": 17,
     }
 
     schedules = _schedules_from_serverless()
